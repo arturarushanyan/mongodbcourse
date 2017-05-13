@@ -4,8 +4,9 @@ const app = express();
 const port = require('./config');
 const route = require('./route');
 const mongoose = require('mongoose');
+const experiment = require('./experiment');
 
-mongoose.connect("mongodb://127.0.0.1/mydt");
+mongoose.connect("mongodb://localhost/mydb");
 
 const db = mongoose.connection;
 
@@ -27,3 +28,6 @@ app.use(function(err, req, res, next) {
 app.listen(port,() => {
     console.log("port 8080 running for server...");
 });
+
+
+console.log(experiment);
