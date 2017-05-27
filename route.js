@@ -58,4 +58,44 @@ router.post('/addproduct',(req,res) => {
     });
 });
 
+
+//trying with GET
+router.get('/findProduct',(req,res) => {
+    productModel.find({name: req.query.name},(err,data) => {
+        if(err){
+            throw err;
+        } else {
+            console.log(data);
+            res.send(data);
+        }
+    });
+});
+
+
+// trying with POST
+router.post('/findProduct',(req,res) => {
+    productModel.find({name: req.body.name},(err,data) => {
+        if(err){
+            throw err;
+        } else {
+            console.log(data);
+            res.send(data);
+        }
+    });
+});
+
+
+//getting range with min and max price with GET
+router.get('/findRange',(req,res) => {
+    productModel.find({price: {$gt : req.query.min, $lt: req.query.max}},(err,data) => {
+        if(err){
+            throw err;
+        } else {
+            console.log(data);
+            res.send(JSON.stringify(data));
+        }
+    })
+    .sort({price : req.query.sort});
+});
+
 module.exports = router;
